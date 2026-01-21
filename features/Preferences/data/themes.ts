@@ -261,6 +261,18 @@ const baseThemeSets: BaseThemeGroup[] = [
     icon: Moon,
     themes: [
       {
+        id: 'shaved-ice',
+        backgroundColor: 'oklch(95.0% 0.025 215.0 / 1)',
+        mainColor: 'oklch(60.0% 0.195 25.0 / 1)',
+        secondaryColor: 'oklch(65.0% 0.175 215.0 / 1)'
+      },
+      {
+        id: 'cherry-cola',
+        backgroundColor: 'oklch(18.0% 0.055 20.0 / 1)',
+        mainColor: 'oklch(58.0% 0.195 25.0 / 1)',
+        secondaryColor: 'oklch(70.0% 0.145 50.0 / 1)'
+      },
+      {
         id: 'garden-bridge',
         backgroundColor: 'oklch(23.0% 0.045 150.0 / 1)',
         mainColor: 'oklch(60.0% 0.205 25.0 / 1)',
@@ -1230,6 +1242,24 @@ const baseThemeSets: BaseThemeGroup[] = [
         backgroundColor: 'oklch(18.5% 0.015 15.0 / 1)',
         mainColor: 'oklch(92.0% 0.045 95.0 / 1)',
         secondaryColor: 'oklch(64.0% 0.210 28.0 / 1)',
+      },
+      {
+        id: 'kuroyuri',
+        backgroundColor: 'oklch(23.8% 0.041 270.0 / 1)', // velvet graphite
+        mainColor: 'oklch(91.5% 0.212 120.0 / 1)', // pear green
+        secondaryColor: 'oklch(80.0% 0.158 340.0 / 1)', // smoky plum
+      },
+      {
+        id: 'vaporwave-shrine',
+        backgroundColor: 'oklch(17.0% 0.072 305.0 / 1)',
+        mainColor: 'oklch(75.0% 0.175 195.0 / 1)',
+        secondaryColor: 'oklch(80.0% 0.195 330.0 / 1)',
+      },
+      {
+        id: 'wind-god',
+        backgroundColor: 'oklch(19.0% 0.045 175.0 / 1)',
+        mainColor: 'oklch(82.0% 0.155 180.0 / 1)',
+        secondaryColor: 'oklch(72.0% 0.135 165.0 / 1)'
       },
     ],
   },
