@@ -4,6 +4,7 @@ import themeSets, {
   applyTheme,
   getWallpaperStyles,
   getThemeDefaultWallpaperId,
+  isPremiumThemeId,
   // hexToHsl
 } from '@/features/Preferences/data/themes';
 import { getWallpaperById } from '@/features/Preferences/data/wallpapers';
@@ -172,6 +173,7 @@ const Themes = () => {
           <fieldset
             className={clsx(
               'grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4',
+              'p-1', // Padding to prevent outline clipping
             )}
           >
             {themeSet.themes.map(currentTheme => (
@@ -179,8 +181,8 @@ const Themes = () => {
                 key={currentTheme.id}
                 className={clsx(
                   currentTheme.id === 'long' && 'col-span-full',
-                  'flex items-center justify-center rounded-xl py-4 duration-275 hover:cursor-pointer',
-                  'flex-1 overflow-hidden',
+                  'flex items-center justify-center rounded-xl py-4 hover:cursor-pointer',
+                  'flex-1',
                   currentTheme.id === selectedTheme &&
                     'border-0 border-(--main-color)',
                 )}
@@ -229,6 +231,11 @@ const Themes = () => {
                     };
                   })(),
                   borderColor: currentTheme.borderColor,
+                  outline:
+                    currentTheme.id === selectedTheme
+                      ? `3px solid ${currentTheme.mainColor}`
+                      : 'none',
+                  transition: 'background-color 275ms',
                 }}
                 onMouseEnter={() => {
                   if (isAdding) return;
@@ -271,44 +278,50 @@ const Themes = () => {
                   }}
                   className='hidden'
                 />
-                {currentTheme.id === '?' ? (
-                  <span className='relative flex w-full items-center justify-center text-center text-lg'>
-                    <span
-                      className={clsx(
-                        'absolute left-1/2 -translate-x-1/2',
-                        currentTheme.id === selectedTheme
-                          ? 'text-black'
-                          : 'text-transparent',
-                      )}
-                    >
-                      {'\u2B24'}
-                    </span>
-                    <span className='opacity-0'>?</span>
-                  </span>
-                ) : (
-                  <span className='flex items-center gap-1.5 text-center text-lg'>
-                    <span className='text-(--secondary-color)'>
-                      {currentTheme.id === selectedTheme ? '\u2B24 ' : ''}
-                    </span>
-                    {currentTheme.id === 'long'
-                      ? 'long loooooooong theme'
-                      : currentTheme.id.split('-').map((themeNamePart, i) => (
-                          <span
-                            key={`${currentTheme.id}-${i}`}
-                            style={{
-                              color:
-                                process.env.NODE_ENV !== 'production'
-                                  ? i === 0
-                                    ? currentTheme.mainColor
-                                    : currentTheme.secondaryColor
-                                  : undefined,
-                            }}
-                          >
-                            {i > 0 && ' '}
-                            {themeNamePart}
-                          </span>
-                        ))}
-                  </span>
+                {!isPremiumThemeId(currentTheme.id) && (
+                  <>
+                    {currentTheme.id === '?' ? (
+                      <span className='relative flex w-full items-center justify-center text-center text-lg'>
+                        <span
+                          className={clsx(
+                            'absolute left-1/2 -translate-x-1/2',
+                            currentTheme.id === selectedTheme
+                              ? 'text-black'
+                              : 'text-transparent',
+                          )}
+                        >
+                          {'\u2B24'}
+                        </span>
+                        <span className='opacity-0'>?</span>
+                      </span>
+                    ) : (
+                      <span className='flex items-center gap-1.5 text-center text-lg'>
+                        <span className='text-(--secondary-color)'>
+                          {currentTheme.id === selectedTheme ? '\u2B24 ' : ''}
+                        </span>
+                        {currentTheme.id === 'long'
+                          ? 'long loooooooong theme'
+                          : currentTheme.id
+                              .split('-')
+                              .map((themeNamePart, i) => (
+                                <span
+                                  key={`${currentTheme.id}-${i}`}
+                                  style={{
+                                    color:
+                                      process.env.NODE_ENV !== 'production'
+                                        ? i === 0
+                                          ? currentTheme.mainColor
+                                          : currentTheme.secondaryColor
+                                        : undefined,
+                                  }}
+                                >
+                                  {i > 0 && ' '}
+                                  {themeNamePart}
+                                </span>
+                              ))}
+                      </span>
+                    )}
+                  </>
                 )}
               </label>
             ))}

@@ -104,32 +104,35 @@ const ThemeCard = memo(function ThemeCard({
       style={{
         ...(wallpaper ? wallpaperStyles : { background }),
         border: borderStyle,
+        outline: isSelected ? `3px solid ${theme.mainColor}` : 'none',
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={() => onClick(theme.id)}
     >
-      <div className='mb-2'>
-        {isChaosTheme ? (
-          <span className='relative flex items-center justify-center text-sm text-white capitalize'>
-            <span
-              className='absolute left-1/2 -translate-x-1/2'
-              style={{ color: isSelected ? '#000' : 'transparent' }}
-            >
-              {'\u2B24'}
+      {!isPremiumTheme && (
+        <div className='mb-2'>
+          {isChaosTheme ? (
+            <span className='relative flex items-center justify-center text-sm text-white capitalize'>
+              <span
+                className='absolute left-1/2 -translate-x-1/2'
+                style={{ color: isSelected ? '#000' : 'transparent' }}
+              >
+                {'\u2B24'}
+              </span>
+              <span className='opacity-0'>?</span>
             </span>
-            <span className='opacity-0'>?</span>
-          </span>
-        ) : (
-          <span
-            className='text-sm capitalize'
-            style={{ color: theme.mainColor }}
-          >
-            {isSelected && '\u2B24 '}
-            {themeName}
-          </span>
-        )}
-      </div>
+          ) : (
+            <span
+              className='text-sm capitalize'
+              style={{ color: theme.mainColor }}
+            >
+              {isSelected && '\u2B24 '}
+              {themeName}
+            </span>
+          )}
+        </div>
+      )}
       <div
         className='flex min-h-4 gap-1.5'
         style={{ visibility: isChaosTheme ? 'hidden' : 'visible' }}
@@ -221,7 +224,7 @@ export default function ThemesModal({ open, onOpenChange }: ThemesModalProps) {
                         </span>
                       )}
                     </div>
-                    <div className='grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4'>
+                    <div className='grid grid-cols-2 gap-3 p-1 sm:grid-cols-3 md:grid-cols-4'>
                       {group.themes.map(theme => (
                         <ThemeCard
                           key={theme.id}
