@@ -494,19 +494,19 @@
   {
     "id": 83,
     "text": "\"〜にしたがって\" means \"as / in accordance with...\".",
-    "completed": false,
+    "completed": true,
     "issued": false
   },
   {
     "id": 84,
     "text": "\"〜を通して\" means \"through / throughout...\".",
-    "completed": false,
+    "completed": true,
     "issued": false
   },
   {
     "id": 85,
     "text": "\"〜に限って\" means \"only / exclusively\".",
     "issued": false,
-    "completed": false
+    "completed": true
   }
 ]
